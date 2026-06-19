@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>お金をください！！</title>
+
+<style>
+
+body {
+  font-family: "Meiryo";
+  text-align: center;
+}
+
+h1 {
+  color: blue;
+}
+
+p {
+  font-size: 24px;
+}
+
+button {
+  min-width: 150px;
+  height: 60px;
+  font-size: 24px;
+  padding: 0 20px;
+  border-radius: 30px;
+  cursor: pointer;
+}
+
+.add {
+  background-color: lightblue;
+}
+
+.reset {
+  background-color: red;
+  color: white;
+}
+
+.donate {
+  background-color: green;
+  color: white;
+}
+
+button:hover {
+  transform: scale(1.05);
+}
+
+/* ポップアップ */
+#popup {
+  display: none;
+
+  position: fixed;
+
+  top: 50%;
+  left: 50%;
+
+  transform: translate(-50%, -50%);
+
+  background: white;
+
+  padding: 30px;
+
+  border: 3px solid black;
+
+  border-radius: 15px;
+
+  box-shadow: 0 0 20px rgba(0,0,0,0.3);
+}
+
+</style>
+
+</head>
+
+<body>
+
+<h1>お金をください！！</h1>
+
+<p>寄付金額を選んでください。</p>
+
+<h2>※一口1000円～になります。</h2>
+
+<p id="count">0円</p>
+
+<button class="add" onclick="addOne()">+1000円</button>
+
+<button class="reset" onclick="resetCount()">リセット</button>
+
+<br><br>
+
+<button onclick="goDonate()">寄付する</button>
+<div id="popup">
+
+  <h2>寄付確認</h2>
+
+  <p id="popupText"></p>
+
+<button onclick="closePopup()">OK</button>
+
+</div>
+
+<script>
+
+let count = 0;
+
+function addOne() {
+  count += 1000;
+  document.getElementById("count").textContent = count + "円";
+}
+
+function resetCount() {
+  count = 0;
+  document.getElementById("count").textContent = count + "円";
+}
+
+function confirmCount() {
+
+  document.getElementById("popupText").textContent =
+    "🎉 現在の寄付金額は " + count + " 円です！";
+
+  document.getElementById("popup").style.display = "block";
+}
+
+function closePopup() {
+  document.getElementById("popup").style.display = "none";
+}
+
+function goDonate() {
+  window.location.href = "donate.html?amount=" + count;
+}
+
+function donate() {
+document.body.innerHTML = ` <h1>🎉 寄付ありがとうございます！</h1>
+
+<p>寄付金額は ${count} 円でした！</p>
+
+<h2>あなたの善意に感謝します！</h2>
+
+<br>
+
+<button onclick="location.reload()">
+  最初のページへ戻る
+</button>
+
+`;
+}
+
+</script>
+
+</body>
+</html>
